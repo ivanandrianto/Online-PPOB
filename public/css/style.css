@@ -1,0 +1,51 @@
+<style>
+        .mycontainer{
+            display: inline block;
+        }
+        .mysidebar{
+            position: fixed;
+            height: 100%;
+        }
+        .content{
+            margin-left: 200px;
+            background-color: #2f4f4f;
+            padding-right:50px;
+            padding-bottom:20px;
+            padding-top:20px;
+            color: white;
+        }
+        .title{
+            margin-left: 200px;
+            background-color: #2f4f4f;
+            padding-left:50px;
+            padding-bottom:20px;
+            padding-top:20px;
+            width:900px;
+            color: white;
+        }
+        a:link, a:visited {
+            background-color: hotpink;
+            color: white;
+            padding: 14px 25px;
+            text-align: center; 
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        a:hover, a:active {
+            background-color: #ccccff;
+        }
+        .side{
+            margin-bottom : 10px;
+            width:150px;
+        }
+        input, textarea {
+          color : black; 
+        }
+		.search-input{
+		  margin-left:10px;
+		}
+		.modal{
+			color:black;
+		}
+</style>
