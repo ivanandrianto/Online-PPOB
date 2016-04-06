@@ -16,6 +16,14 @@ function isMerchant()
 	return 0;
 }
 
+function getMerchantID()
+{
+	if (Auth::guard('merchant')->check()){
+		return Auth::guard('merchant')->user()->id;
+	}
+	return 0;
+}
+
 function isAuthenticated()
 {
 	if ((Auth::guard('merchant')->check()) || (Auth::guard('admin')->check())){

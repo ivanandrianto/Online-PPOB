@@ -83,4 +83,7 @@ Route::group(['middleware' => ['web']], function () {
     /* TRANSAKSI */
     /* Transaksi - Merchant */
     Route::get('merchant/transaksi', 'TransaksiController@getView');
+    Route::get('merchant/transaksi/jenis/{id}', 'TransaksiController@selectJenis');
+    Route::get('merchant/transaksi/item/{id}', 'TransaksiController@selectItem');
+    Route::post('merchant/transaksi/do', 'TransaksiController@performTransaction');
 });

@@ -24,4 +24,56 @@ class TransaksiController extends Controller
 	    	return view('transaksi.index',compact('jenis_item'));
     	}
     }
+
+    public function selectJenis($id){
+    	if(isMerchant()){
+	   		$jenis_item = JenisItem::find($id);
+	   		if($jenis_item){
+	   			if($jenis_item->hasSelections==false){
+	   				$item = Item::where('jenis','=',$id);
+	   				if($item->count()>0){
+	   					$item = $item->get()->first();
+	   				} else {
+	   					return "No item";
+	   				}
+	   				return view('transaksi.do',compact('jenis_item','item'));		
+	   			} else {
+	   				$items = Item::where('jenis','=',$id)->get();
+	   				return view('transaksi.select',compact('jenis_item','items'));		
+	   			}
+	   		}
+    	}
+    }
+
+    public function selectItem($id){
+    	if(isMerchant()){
+	   		$item = Item::find($id);
+	   		if(!$item)
+	   			return "Not found";
+	   		$jenis_item = JenisItem::find($item->jenis);
+			if(!$jenis_item)
+	   			return "Not found";
+	   		return view('transaksi.do',compact('jenis_item','item'));
+    	}
+    }
+
+    public function performTransaction($id,$msg,$price=null){
+    	$merchant_id = getMerchantID();
+    	if($merchant_id!=0){
+    		$item = Item::find($id);
+	   		if(!$item)
+	   			return "Not found";
+	   		$item_price=$item->harga;
+	   		if(strlen($item_price)<1)
+	   			$item_price=$price;
+	   		if(strlen($item_price)<1)
+	   			return "Price not valid";
+
+	   		$transaksi = new Transaksi;
+	   		$transaksi->merchant_id = $merchant_id;
+	   		$transaksi->item_id = $id;
+	   		$transaksi->harga = $item_price;
+	   		$transaksi->save();
+    	}
+    }
 }
