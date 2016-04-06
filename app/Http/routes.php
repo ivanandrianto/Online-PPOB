@@ -34,13 +34,17 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('merchant/register', 'MerchantAuth\AuthController@showRegistrationForm');
     Route::post('merchant/register', 'MerchantAuth\AuthController@register');
 
-    Route::get('/merchant', 'MerchantController@index');
+    //Route::get('/merchant', 'MerchantController@index');
 
     /* END OF AUTHENTICATION ROUTES */
 
     Route::get('/', function () {
         return view('welcome');
     });
+
+    /* DASHBOARD */
+    /* Dashboard - Merchant */
+    Route::get('merchant/dashbaord', 'MerchantController@showDashboard');
 
     /* MERCHANT */
     /* Merchant - Admin */

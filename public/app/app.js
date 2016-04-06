@@ -21,3 +21,27 @@ var appItem = angular.module('ItemRecords', [], function($interpolateProvider) {
             requireBase: false
         })
     });
+
+var appRegMerchant = angular.module('RegMerchantRecords', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    })
+    .constant('API_URL', 'http://localhost:8000/merchant/register/')
+    .config(function($locationProvider){
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        })
+    });
+
+var appLoginMerchant = angular.module('LoginMerchantRecords', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    })
+    .constant('API_URL', 'http://localhost:8000/merchant/login/')
+    .config(function($locationProvider){
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        })
+    });

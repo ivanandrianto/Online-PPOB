@@ -56,8 +56,61 @@ h3{font-weight: 300; font-size: 22px;margin-bottom: 40px}
 .ux-mood li{margin-bottom: 10px}
 .upper{font-weight: bold}
 
+/* jenis item */
+.jenis-item{
+    background-color: red;
+    height:40px;
+    margin: 10px 0 10px 0;
+    padding:10px;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+.jenis-item > a {
+    color:white;
+}
+
+.hidden-menu{
+    display: none;
+    height:0;
+}
+
+.sidebar-offcanvas{
+    height:100vh;
+}
+
+.form-group .control-label, .form-group .input{
+    margin:10px 0 10px 0;
+}
+
+.merchant-welcome{
+    text-align: center;
+    padding-top: 20vh;
+    vertical-align: center; 
+    height:calc(100vh - 50px);;
+    background-image: url('../images/merchant-welcome.jpg');
+    background-size: 100% 100%;
+}
+
+.merchant-welcome #welcome-text h2{
+    color: #ff0000;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.registration-form{
+    width: 60%;
+}
+
+.error-msg{
+    color: #ff0000;
+}
 /* collapsed sidebar styles */
-@media screen and (max-width: 767px) {  
+@media screen and (max-width: 767px) {
+    .registration-form{
+        width: 100%;
+    }
+
     .affix {position: static;}
     #affix{width: 100%;}
   
@@ -76,10 +129,16 @@ h3{font-weight: 300; font-size: 22px;margin-bottom: 40px}
         left: -70%;
     }
     
-    .sidebar-offcanvas ul li{margin:0}
-    .sidebar-offcanvas ul li a{color:#fff;padding: 15px 20px;margin:0;font-size: 15px;border-bottom: 1px solid #d6474d}
-    .sidebar-offcanvas ul li a:hover{background:#54303a;border:none; border-radius:0}
-    
+    .sidebar-offcanvas ul li, .sidebar-offcanvas ul div li{margin:0}
+    .sidebar-offcanvas ul li a, .sidebar-offcanvas ul div li a{color:#fff;padding: 15px 20px;margin:0;font-size: 15px;border-bottom: 1px solid #d6474d}
+    .sidebar-offcanvas ul li a:hover, .sidebar-offcanvas ul div li:hover{background:#54303a;border:none; border-radius:0}
+    .hidden-menu{
+        display: inline;
+    }
+    .hidden-menu a{
+        display: block;
+    }
+
     .nav{margin-top: 0px;}
     .nav > li > a:hover, 
     .nav > li > a:focus{background-color: #ff625f}
@@ -87,17 +146,6 @@ h3{font-weight: 300; font-size: 22px;margin-bottom: 40px}
     .active {left: 0;}
 }
 
-.jenis-item{
-    background-color: red;
-    height:40px;
-    margin: 10px 0 10px 0;
-    padding:10px;
-    border-radius: 7px;
-    font-size: 15px;
-}
 
-.jenis-item > a {
-    color:white;
-}
 
 

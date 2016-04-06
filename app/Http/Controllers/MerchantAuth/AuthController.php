@@ -101,9 +101,10 @@ class AuthController extends Controller
 
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
-            return Redirect::to('/merchant/login')
+            /*return Redirect::to('/merchant/login')
                 ->withErrors($validator) 
-                ->withInput(Input::except('password'));
+                ->withInput(Input::except('password'));*/
+                return $validator->messages()->first();
         } else {
                 
             $merchantdata = array(
@@ -111,9 +112,9 @@ class AuthController extends Controller
                 'password'  => Input::get('password')
             );
             if (Auth::guard('merchant')->attempt($merchantdata)) {
-                return Redirect::to('/merchant');
+                return 1;
             } else {
-                return Redirect::to('/merchant/login');
+                return "Username and password not match";
             }
 
         }
@@ -134,9 +135,10 @@ class AuthController extends Controller
 
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
-            return Redirect::to('/merchant/register')
+            /*return $validator 
                 ->withErrors($validator) 
-                ->withInput(Input::except('password'));
+                ->withInput(Input::except('password'));*/
+                return $validator->messages()->first();
         } else {
             
             if (!preg_match('/^[0-9]+$/', Input::get('telepon')))
@@ -157,7 +159,7 @@ class AuthController extends Controller
             $merchant->alamat           = Input::get('alamat');
             $merchant->telepon          = Input::get('telepon');
             $merchant->email            = Input::get('email');
-            $merchant->password         = Input::get('password');
+            $merchant->password         = bcrypt(Input::get('password'));
             $merchant->status           = "Diproses";
             $merchant->save();
 
@@ -169,7 +171,7 @@ class AuthController extends Controller
             $permohonan->status           = "Diproses";
             $permohonan->save();
 
-            return Redirect::to('/merchant/login');
+            return 1;
         }
     }
 

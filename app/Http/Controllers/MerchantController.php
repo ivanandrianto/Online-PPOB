@@ -24,9 +24,21 @@ class MerchantController extends Controller
 
     public function getView(){
         if(isMerchant()){
-            return view('merchant.dashboard');
+            return Redirect::to('merchant/dashbaord');
         } else {
             return view('merchant.welcome');
+        }
+    }
+
+    public function showDashboard(){
+        if(!isMerchant())
+            return Redirect::to('/');
+        if(strcmp(getMerchantStatus(),'Diterima')==0){ //Diterima
+            return view('merchant.dashboard');
+        } else if(strcmp(getMerchantStatus(),'Diproses')==0){ //Diproses
+            return view('merchant.dashboard_processed');
+        } else { //Ditolak
+            return view('merchant.dashboard_rejected');
         }
     }
 
@@ -46,11 +58,6 @@ class MerchantController extends Controller
     public function __construct(){
         //$this->middleware('admin');
    	}
-
-	public function index(){
-		//return Auth::guard('admin')->user()->nama;
-        return view('merchant.dashboard');
-    }
 
     /**
      * Display all Merchants
