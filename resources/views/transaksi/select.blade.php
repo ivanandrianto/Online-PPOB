@@ -16,14 +16,11 @@
 				</div>
 			</div>
 			
-			
 			<div class="row">
 				@include('general.sidebar')
-				
 				<!-- content -->
 				<div class="col-xs-12  col-sm-8 col-md-9 content">		
 					<h2>{{ $jenis_item->title }}</h2>
-
 					@foreach($items as $key => $value)
 						<div class="jenis-item">
 							<a href="/merchant/transaksi/item/{{ $value-> id}}">{{ $value->nama }}</a>

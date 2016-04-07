@@ -98,7 +98,7 @@ h3{font-weight: 300; font-size: 22px;margin-bottom: 40px}
     font-weight: bold;
 }
 
-.registration-form{
+.registration-form, .transaction-form{
     width: 60%;
 }
 

@@ -51,7 +51,7 @@
                     <label class="col-sm-2 control-label">Confirm password</label>
                     <div class="col-sm-10 input">
                         <input required type="password" class="form-control has-error" id="password2" name="password2"
-                        placeholder="Masukkan password2" 
+                        placeholder="Konfirmasi password" 
                         ng-model="merchant.password2" ng-required="true">
                         <span class="help-inline" ng-show="frmRegMerchant.password2.$invalid && frmRegMerchant.password2.$touched">Required</span>
                     </div>

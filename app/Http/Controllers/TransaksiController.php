@@ -57,23 +57,25 @@ class TransaksiController extends Controller
     	}
     }
 
-    public function performTransaction($id,$msg,$price=null){
+    public function performTransaction(Request $request){
     	$merchant_id = getMerchantID();
     	if($merchant_id!=0){
-    		$item = Item::find($id);
+    		$item = Item::find(Input::get('item_id'));
 	   		if(!$item)
 	   			return "Not found";
 	   		$item_price=$item->harga;
 	   		if(strlen($item_price)<1)
-	   			$item_price=$price;
+	   			$item_price=Input::get('price');
 	   		if(strlen($item_price)<1)
 	   			return "Price not valid";
 
 	   		$transaksi = new Transaksi;
 	   		$transaksi->merchant_id = $merchant_id;
-	   		$transaksi->item_id = $id;
+	   		$transaksi->item_id = Input::get('item_id');
 	   		$transaksi->harga = $item_price;
+	   		$transaksi->keterangan = Input::get('nomor');
 	   		$transaksi->save();
+	   		return 1;
     	}
     }
 }

@@ -45,3 +45,15 @@ var appLoginMerchant = angular.module('LoginMerchantRecords', [], function($inte
             requireBase: false
         })
     });
+
+var appDoTransaction = angular.module('DoTransactionRecords', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    })
+    .constant('API_URL', 'http://localhost:8000/merchant/transaksi/do/')
+    .config(function($locationProvider){
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        })
+    });
