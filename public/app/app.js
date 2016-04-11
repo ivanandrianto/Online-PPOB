@@ -70,3 +70,15 @@ var appDoTransaction = angular.module('DoTransactionRecords', [], function($inte
             requireBase: false
         })
     });
+
+var appPermohonan = angular.module('PermohonanRecords', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    })
+    .constant('API_URL', 'http://localhost:8000/api/v1/permohonan/')
+    .config(function($locationProvider){
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        })
+    });

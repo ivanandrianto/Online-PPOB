@@ -18,7 +18,7 @@ class JenisItemController extends Controller
    	}
 
    	public function getView(){
-        return view('jenisitem.index');
+        return view('admin.jenisitem.index');
     }
 
    	public function validateInput(Request $request){

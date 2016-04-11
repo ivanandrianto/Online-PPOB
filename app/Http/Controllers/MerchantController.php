@@ -21,6 +21,17 @@ class MerchantController extends Controller
         return Validator::make(Input::all(), $rules);
 	}
 
+    public function validateStatus($status){
+        if(strcmp($status,'Diproses')==0){
+            return true;
+        } else if(strcmp($status,'Diterima')==0){
+            return true;
+        } else if(strcmp($status,'Ditolak')==0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function getView(){
         if(isMerchant()){
@@ -104,7 +115,7 @@ class MerchantController extends Controller
         	}
 
         	/* Validate phone number */
-            if (!preg_match('/^[0-9]+$/', Input::get('no_telp'))){
+            if (!preg_match('/^[0-9]+$/', Input::get('telepon'))){
                 return "No. Telp tidak valid. Hanya boleh mengandung angka";
             }
 
@@ -140,9 +151,12 @@ class MerchantController extends Controller
         } else {
 
         	/* Validate phone number */
-            if (!preg_match('/^[0-9]+$/', Input::get('no_telp'))){
+            if (!preg_match('/^[0-9]+$/', Input::get('telepon'))){
                 return "No. Telp tidak valid. Hanya boleh mengandung angka";
             }
+
+            if(!$this->validateStatus(Input::get('status')))
+                return "Status tidak valid";
 
             $merchant = Merchant::find($id);
             if(!$merchant)
@@ -152,7 +166,7 @@ class MerchantController extends Controller
             $merchant->alamat       		= Input::get('alamat');
             $merchant->telepon      		= Input::get('telepon');
             $merchant->email      			= Input::get('email');
-            $merchant->status  				= "Diproses";
+            $merchant->status  				= Input::get('status');
             $merchant->save();
             return 1;
         }

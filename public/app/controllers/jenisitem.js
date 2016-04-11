@@ -13,7 +13,7 @@ appJenisItem.controller('JenisItemController', function($scope, $location, $http
     });
 
     //show modal form
-    $scope.toggle = function(modalstate, id_penduduk) {
+    $scope.toggle = function(modalstate, id) {
         $scope.modalstate = modalstate;
         $scope.frmJenisItem.$setUntouched();
         $scope.error = "";
@@ -24,8 +24,8 @@ appJenisItem.controller('JenisItemController', function($scope, $location, $http
                 break;
             case 'edit':
                 $scope.form_title = "Edit jenisitem";
-                $scope.id_penduduk = id_penduduk;
-                $http.get(API_URL + 'get/' + id_penduduk)
+                $scope.id = id;
+                $http.get(API_URL + 'get/' + id)
                         .success(function(response) {
                             $scope.jenisitem = response;
                         });

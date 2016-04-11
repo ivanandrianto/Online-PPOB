@@ -14,7 +14,7 @@ appItem.controller('ItemController', function($scope, $location, $http, API_URL,
     });
 
     //show modal form
-    $scope.toggle = function(modalstate, id_penduduk) {
+    $scope.toggle = function(modalstate, id) {
         $scope.modalstate = modalstate;
         $scope.frmItem.$setUntouched();
         $scope.error = "";
@@ -25,8 +25,8 @@ appItem.controller('ItemController', function($scope, $location, $http, API_URL,
                 break;
             case 'edit':
                 $scope.form_title = "Edit Item";
-                $scope.id_penduduk = id_penduduk;
-                $http.get(API_URL + 'get/' + id_penduduk)
+                $scope.id = id;
+                $http.get(API_URL + 'get/' + id)
                         .success(function(response) {
                             $scope.item = response;
                         });

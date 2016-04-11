@@ -21,7 +21,7 @@ class TransaksiController extends Controller
     public function getView(){
     	if(isMerchant()){
     		$jenis_item = JenisItem::orderBy('id','asc')->get();
-	    	return view('transaksi.index',compact('jenis_item'));
+	    	return view('merchant.transaksi.index',compact('jenis_item'));
     	}
     }
 
@@ -36,10 +36,10 @@ class TransaksiController extends Controller
 	   				} else {
 	   					return "No item";
 	   				}
-	   				return view('transaksi.do',compact('jenis_item','item'));		
+	   				return view('merchant.transaksi.do',compact('jenis_item','item'));		
 	   			} else {
 	   				$items = Item::where('jenis','=',$id)->get();
-	   				return view('transaksi.select',compact('jenis_item','items'));		
+	   				return view('merchant.transaksi.select',compact('jenis_item','items'));		
 	   			}
 	   		}
     	}
@@ -53,7 +53,7 @@ class TransaksiController extends Controller
 	   		$jenis_item = JenisItem::find($item->jenis);
 			if(!$jenis_item)
 	   			return "Not found";
-	   		return view('transaksi.do',compact('jenis_item','item'));
+	   		return view('merchant.transaksi.do',compact('jenis_item','item'));
     	}
     }
 

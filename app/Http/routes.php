@@ -90,7 +90,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('admin/permohonan', 'PermohonanController@getView');
     Route::get('/api/v1/permohonan/getAll/{status?}', 'PermohonanController@getAllPermohonan');
     Route::get('/api/v1/permohonan/get/{id}', 'PermohonanController@getPermohonan');
-    Route::post('/api/v1/permohonan/approveReject/{type}/{id}', 'PermohonanController@approveRejetPermohonan');
+    Route::post('/api/v1/permohonan/approveReject/{type}/{id}', 'PermohonanController@approveRejectPermohonan');
 
 
     /* TRANSAKSI */

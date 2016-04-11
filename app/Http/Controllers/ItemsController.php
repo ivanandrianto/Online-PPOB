@@ -16,7 +16,7 @@ class ItemsController extends Controller
     public function getView(){
         if(!isAdmin())
             return Redirect::to('/')->send();
-        return view('item.index');
+        return view('admin.item.index');
     }
     public function checkJenisItem($id){
         return JenisItem::find($id);

@@ -20,7 +20,7 @@ class PermohonanController extends Controller
 
     public function getView(){
     	/* Hanya surveyor */
-        return view('permohonan.index');
+        return view('admin.permohonan.index');
     }
 
     /**
@@ -31,11 +31,10 @@ class PermohonanController extends Controller
     public function getAllPermohonan($status = null){
     	/* Hanya surveyor */
     	if($status == null){
-			return Permohonan::orderBy('id','asc')->get();
+			 return Permohonan::with('merchant')->orderBy('created_at','desc')->get();
     	} else {
-    		return Permohonan::where('status','=',$status)->orderBy('id','asc')->get();
+    		return Permohonan::with('merchant')->where('status','=',$status)->orderBy('created_at','desc')->get();
     	}
-    	
     }
 
     /**
@@ -46,7 +45,7 @@ class PermohonanController extends Controller
      */
 	public function getPermohonan($id) {
 		/* Hanya surveyor */
-        return Permohonan::find($id);
+        return Permohonan::with('merchant')->get()->find($id);
     }
 
     /**
@@ -80,5 +79,6 @@ class PermohonanController extends Controller
        	$merchant->status=$status;
        	$permohonan->save();
        	$merchant->save();
+        return 1;
     }
 }

@@ -7,7 +7,6 @@
         <link href="<?= asset('css/bootstrap.min.css') ?>" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= asset('css/style.css') ?>">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <script>angular.module("MerchantRecords").constant("CSRF_TOKEN", '{{ csrf_token() }}');</script>
     </head>
     <body ng-controller="MerchantController">
         <div class="mycontainer">
@@ -31,8 +30,8 @@
                                 <td><% merchant.nama %></td>
                                 <td><% merchant.alamat %></td>
                                 <td><% merchant.telepon %></td>
-                                <td><% merchant.email%></td>
-                                <td><% merchant.status%></td>
+                                <td><% merchant.email %></td>
+                                <td><% merchant.status %></td>
                                 <td>
                                     <button class="btn btn-default btn-xs btn-detail" ng-click="toggle('edit', merchant.id)">Edit</button>
                                     <button class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(merchant.id)">Delete</button>
@@ -98,8 +97,11 @@
                                         <div class="form-group error">
                                             <label for="status" class="col-sm-3 control-label">Status</label>
                                             <div class="col-sm-9">
-                                                <input required type="text" class="form-control has-error" id="status" name="status" placeholder="Status" value="<% status %>" 
-                                                ng-model="merchant.status" ng-required="true">
+                                                <select id="status" name="status" class="form-control" ng-model="merchant.status">
+                                                  <option value="Diproses">Diproses</option>
+                                                  <option value="Diterima">Diterima</option>
+                                                  <option value="Ditolak">Ditolak</option>
+                                                </select>
                                                 <span class="help-inline" 
                                                 ng-show="frmMerchant.status.$invalid && frmMerchant.status.$touched">Field status harus diisi</span>
                                             </div>
@@ -108,7 +110,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id_penduduk, '{{ csrf_token() }}')" ng-disabled="frmMerchant.$invalid">Save changes</button>
+                                    <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, merchant.id, '{{ csrf_token() }}')" ng-disabled="frmMerchant.$invalid">Save changes</button>
                                 </div>
                             </div>
                         </div>

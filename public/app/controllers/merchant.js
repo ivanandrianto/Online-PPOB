@@ -9,15 +9,16 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
     });
 
     //show modal form
-    $scope.toggle = function(modalstate, nik) {
+    $scope.toggle = function(modalstate, id) {
+
         $scope.modalstate = modalstate;
         $scope.frmMerchant.$setUntouched();
         $scope.error = "";
         switch (modalstate) {
             case 'edit':
                 $scope.form_title = "Edit Merchant";
-                $scope.nik = nik;
-                $http.get(API_URL + 'get/' + nik)
+                $scope.id = id;
+                $http.get(API_URL + 'get/' + id)
                         .success(function(response) {
                             $scope.merchant = response;                            
                         });
@@ -30,6 +31,7 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
 
     //save new record / update existing record
     $scope.save = function(modalstate, id, csrf_token) {
+        alert(id);
         $.ajaxSetup({
             headers: {
                 'X-XSRF-Token': csrf_token
@@ -88,12 +90,12 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
     }
 
     //delete record
-    $scope.confirmDelete = function(nik) {
+    $scope.confirmDelete = function(id) {
         var isConfirmDelete = confirm('Apakah Anda yakin ingin menghapus record ini?');
         if (isConfirmDelete) {
             $http({
                 method: 'DELETE',
-                url: API_URL + 'delete/' + nik
+                url: API_URL + 'delete/' + id
             }).success(function(response) {
                 if(response == 1){
                     location.reload();
