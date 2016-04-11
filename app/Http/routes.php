@@ -99,4 +99,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('merchant/transaksi/jenis/{id}', 'TransaksiController@selectJenis');
     Route::get('merchant/transaksi/item/{id}', 'TransaksiController@selectItem');
     Route::post('merchant/transaksi/do', 'TransaksiController@performTransaction');
+    Route::get('merchant/transaksi/history/{date?}', 'TransaksiController@getMyTransactions');
 });

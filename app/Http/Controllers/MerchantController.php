@@ -204,12 +204,10 @@ class MerchantController extends Controller
      * @return Response
      */
     public function editMyMerchant(Request $request, $id) {
-        if(!isMerchant())
+        if(!isMerchantApproved())
             return "Not allowed";
 
-        //$this->middleware('admin');
        /* Authentication. Only the merchant owner can access */
-
 
        /* Validation with Laravel built-in validator*/
        $validator = $this->validateInput($request);

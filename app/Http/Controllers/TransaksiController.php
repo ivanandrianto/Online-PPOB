@@ -19,14 +19,18 @@ class TransaksiController extends Controller
    	}
 
     public function getView(){
-    	if(isMerchant()){
+    	if(isMerchantApproved()){
     		$jenis_item = JenisItem::orderBy('id','asc')->get();
 	    	return view('merchant.transaksi.index',compact('jenis_item'));
+    	} else if (isSoftwareEngineer()){
+    		return view('admin.transaksi.index',compact('jenis_item'));
+    	} else {
+    		return Redirect::to('/');
     	}
     }
 
     public function selectJenis($id){
-    	if(isMerchant()){
+    	if(isMerchantApproved()){
 	   		$jenis_item = JenisItem::find($id);
 	   		if($jenis_item){
 	   			if($jenis_item->hasSelections==false){
@@ -46,7 +50,7 @@ class TransaksiController extends Controller
     }
 
     public function selectItem($id){
-    	if(isMerchant()){
+    	if(isMerchantApproved()){
 	   		$item = Item::find($id);
 	   		if(!$item)
 	   			return "Not found";
@@ -58,24 +62,47 @@ class TransaksiController extends Controller
     }
 
     public function performTransaction(Request $request){
-    	$merchant_id = getMerchantID();
-    	if($merchant_id!=0){
-    		$item = Item::find(Input::get('item_id'));
-	   		if(!$item)
-	   			return "Not found";
-	   		$item_price=$item->harga;
-	   		if(strlen($item_price)<1)
-	   			$item_price=Input::get('price');
-	   		if(strlen($item_price)<1)
-	   			return "Price not valid";
+    	if(isMerchantApproved()){
+    		$merchant_id = getMerchantID();
+	    	if($merchant_id!=0){
+	    		$item = Item::find(Input::get('item_id'));
+		   		if(!$item)
+		   			return "Not found";
+		   		$item_price=$item->harga;
+		   		if(strlen($item_price)<1)
+		   			$item_price=Input::get('price');
+		   		if(strlen($item_price)<1)
+		   			return "Price not valid";
 
-	   		$transaksi = new Transaksi;
-	   		$transaksi->merchant_id = $merchant_id;
-	   		$transaksi->item_id = Input::get('item_id');
-	   		$transaksi->harga = $item_price;
-	   		$transaksi->keterangan = Input::get('nomor');
-	   		$transaksi->save();
-	   		return 1;
+		   		$transaksi = new Transaksi;
+		   		$transaksi->merchant_id = $merchant_id;
+		   		$transaksi->item_id = Input::get('item_id');
+		   		$transaksi->harga = $item_price;
+		   		$transaksi->keterangan = Input::get('nomor');
+		   		$transaksi->save();
+		   		return 1;
+	    	}
+    	}
+    }
+
+    public function getAllTransactions(){
+    	if(isAccountant()){
+    		$transaksis = Transaksi::with('merchant')->with('item')->orderBy('created_at','desc')->paginate(20);
+    		return view('admin.transaksi.history',compact('transaksis'));
+    	}
+    }
+
+    public function getMyTransactions($date = null){
+    	if(isMerchantApproved()){
+    		$id = getMerchantID();
+    		if($date == null){
+    			$transaksis = Transaksi::with(['merchant','item'])->where('merchant_id','=',$id)->orderBy('created_at','desc')->paginate(20);
+    			return view('merchant.transaksi.history',compact('transaksis'));
+    		} else {
+    			$transaksis = Transaksi::with(['merchant','item'])->where('merchant_id','=',$id)->whereDate('created_at','=',$date)->orderBy('created_at','desc')->paginate(20);
+    			return view('merchant.transaksi.history',compact('transaksis','date'));
+    		}
+
     	}
     }
 }
