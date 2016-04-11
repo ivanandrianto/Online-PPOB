@@ -10,11 +10,24 @@ var appMerchant = angular.module('MerchantRecords', [], function($interpolatePro
         })
     });
 
+var appJenisItem = angular.module('JenisItemRecords', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    })
+    .constant('API_URL', 'http://localhost:8000/api/v1/jenisitem/')
+    .config(function($locationProvider){
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        })
+    });
+
 var appItem = angular.module('ItemRecords', [], function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
     })
     .constant('API_URL', 'http://localhost:8000/api/v1/item/')
+    .constant('API_URL_JENIS', 'http://localhost:8000/api/v1/jenisitem/')
     .config(function($locationProvider){
         $locationProvider.html5Mode({
             enabled: true,

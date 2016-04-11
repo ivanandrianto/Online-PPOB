@@ -1,14 +1,13 @@
 
 
-appItem.controller('ItemController', function($scope, $location, $http, API_URL,API_URL_JENIS) {
+appJenisItem.controller('JenisItemController', function($scope, $location, $http, API_URL) {
 
-    
+    $scope.hasSelections_list = [
+        {"value":"1","name":"Ya"},
+        {"value":"0","name":"Tidak"}
+    ];
+
     $http.get(API_URL + "getAll/")
-    .success(function(response) {
-        $scope.items = response;
-    });
-
-    $http.get(API_URL_JENIS + "getAll/")
     .success(function(response) {
         $scope.jenisitems = response;
     });
@@ -16,19 +15,19 @@ appItem.controller('ItemController', function($scope, $location, $http, API_URL,
     //show modal form
     $scope.toggle = function(modalstate, id_penduduk) {
         $scope.modalstate = modalstate;
-        $scope.frmItem.$setUntouched();
+        $scope.frmJenisItem.$setUntouched();
         $scope.error = "";
         switch (modalstate) {
             case 'add':
-                $scope.form_title = "Tambah Item baru";
-                $scope.item = "";
+                $scope.form_title = "Tambah jenisitem baru";
+                $scope.jenisitem = "";
                 break;
             case 'edit':
-                $scope.form_title = "Edit Item";
+                $scope.form_title = "Edit jenisitem";
                 $scope.id_penduduk = id_penduduk;
                 $http.get(API_URL + 'get/' + id_penduduk)
                         .success(function(response) {
-                            $scope.item = response;
+                            $scope.jenisitem = response;
                         });
                 break;
             default:
@@ -46,9 +45,10 @@ appItem.controller('ItemController', function($scope, $location, $http, API_URL,
         });
         var url = API_URL;
         var _data = $.param({
-            'nama'      : $scope.item.nama,
-            'jenis'     : $scope.item.jenis,
-            'harga'     : $scope.item.harga
+            'jenis'             : $scope.jenisitem.jenis,
+            'hasSelections'     : $scope.jenisitem.hasSelections,
+            'title'             : $scope.jenisitem.title,
+            'message'           : $scope.jenisitem.message
         });
 
         if (modalstate === 'add'){
@@ -83,6 +83,7 @@ appItem.controller('ItemController', function($scope, $location, $http, API_URL,
                 $scope.error = response;
             }
         }).error(function(response) {
+            alert(response);
             console.log(response);
             alert('Error');
         });
@@ -103,7 +104,7 @@ appItem.controller('ItemController', function($scope, $location, $http, API_URL,
                 if(response == 1){
                     location.reload();
                 } else {
-                    alert("Tidak dapat menghapus Item");
+                    alert("Tidak dapat menghapus jenisitem");
                 }
             }).error(function(response) {
                 console.log(response);

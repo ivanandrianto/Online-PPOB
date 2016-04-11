@@ -1,37 +1,39 @@
 <!DOCTYPE html>
-<html lang="en-US" ng-app="ItemRecords">
+<html lang="en-US" ng-app="JenisItemRecords">
     <head>
-        <title>Item</title>
+        <title>Jenis Item</title>
 
         <!-- Load Bootstrap CSS -->
         <link href="<?= asset('css/bootstrap.min.css') ?>" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= asset('css/style.css') ?>">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
     </head>
-    <body ng-controller="ItemController">
+    <body ng-controller="JenisItemController">
         <div class="mycontainer">
             <div class="content" style="width:900px;height:100%">
-                <h2>Item</h2>
+                <h2>JenisItem</h2>
                 <div>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nama</th>
                                 <th>Jenis</th>
-                                <th>Harga</th>
-                                <th><button id="btn-add" class="btn btn-primary btn-xs" ng-click="toggle('add', 0)">Tambah Item Baru</button></th>
+                                <th>hasSelections</th>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th><button id="btn-add" class="btn btn-primary btn-xs" ng-click="toggle('add', 0)">Tambah JenisItem Baru</button></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in items">
-                                <td><% item.id %></td>
-                                <td><% item.nama %></td>
-                                <td><% item.jenis %></td>
-                                <td><% item.harga %></td>
+                            <tr ng-repeat="jenisitem in jenisitems">
+                                <td><% jenisitem.id %></td>
+                                <td><% jenisitem.jenis %></td>
+                                <td><% jenisitem.hasSelections %></td>
+                                <td><% jenisitem.title %></td>
+                                <td><% jenisitem.message %></td>
                                 <td>
-                                    <button class="btn btn-default btn-xs btn-detail" ng-click="toggle('edit', item.id)">Edit</button>
-                                    <button class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(item.id)">Delete</button>
+                                    <button class="btn btn-default btn-xs btn-detail" ng-click="toggle('edit', jenisitem.id)">Edit</button>
+                                    <button class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(jenisitem.id)">Delete</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -47,38 +49,54 @@
                                 </div>
                                 <div class="modal-body">
                                     <% error %>
-                                    <form name="frmItem" class="form-horizontal" novalidate="">
+                                    <form name="frmJenisItem" class="form-horizontal" novalidate="">
                                         <input id="_token" name="_token" type="hidden" value="<?php echo csrf_token(); ?>"
-                                        ng-model="item._token">
-
-                                        <div class="form-group error">
-                                            <label for="nama" class="col-sm-3 control-label">Nama</label>
-                                            <div class="col-sm-9">
-                                                <input required type="text" class="form-control has-error" id="nama" name="nama" placeholder="Nama" value="<% nama %>" 
-                                                ng-model="item.nama" ng-required="true">
-                                                <span class="help-inline" 
-                                                ng-show="frmItem.nama.$invalid && frmItem.nama.$touched">Field nama harus diisi</span>
-                                            </div>
-                                        </div>
+                                        ng-model="jenisitem._token">
 
                                         <div class="form-group error">
                                             <label for="jenis" class="col-sm-3 control-label">Jenis</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control has-error" id="jenis" name="jenis" 
-                                                    ng-model="item.jenis"
-                                                    ng-options="x.id as x.jenis for x in jenisitems" ng-required="true"
+                                                <input required type="text" class="form-control has-error" id="jenis" name="jenis" placeholder="Jenis" value="<% jenis %>" 
+                                                ng-model="jenisitem.jenis" ng-required="true">
+                                                <span class="help-inline" 
+                                                ng-show="frmJenisItem.jenis.$invalid && frmJenisItem.jenis.$touched">Field jenis harus diisi</span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group error">
+                                            <label for="hasSelections" class="col-sm-3 control-label">hasSelections</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control has-error" id="hasSelections" name="hasSelections" 
+                                                    ng-init="jenisitem.hasSelections=hasSelections_list[0]['value']"
+                                                    ng-model="jenisitem.hasSelections"
+                                                    ng-options="x.value as x.name for x in hasSelections_list" ng-required="true"
                                                 >
                                                 </select>
+                                                <span class="help-inline" 
+                                                ng-show="frmJenisItem.hasSelections.$invalid && frmJenisItem.hasSelections.$touched">Field hasSelections harus diisi</span>
+                                            </div>
+                                        </div>
+
+                                        
+
+                                        <div class="form-group error">
+                                            <label for="title" class="col-sm-3 control-label">Title</label>
+                                            <div class="col-sm-9">
+                                                <input required type="text" class="form-control has-error" id="title" name="title" placeholder="Title" value="<% title %>" 
+                                                ng-model="jenisitem.title" ng-required="true">
+                                                <span class="help-inline" 
+                                                ng-show="frmJenisItem.title.$invalid && frmJenisItem.title.$touched">Field title harus diisi</span>
                                             </div>
                                         </div>
 
                                         <div class="form-group error">
-                                            <label for="harga" class="col-sm-3 control-label">Harga</label>
+                                            <label for="message" class="col-sm-3 control-label">Message</label>
                                             <div class="col-sm-9">
-                                                <input required type="text" class="form-control has-error" id="harga" name="harga" placeholder="Harga" value="<% harga %>" 
-                                                ng-model="item.harga" ng-required="true">
+                                                <input required type="text" class="form-control has-error" id="message" name="message" placeholder="Message" value="<% jenis %>" 
+                                                ng-model="jenisitem.message" ng-required="true">
                                                 <span class="help-inline" 
-                                                ng-show="frmItem.harga.$invalid && frmItem.harga.$touched">Field harga harus diisi</span>
+                                                ng-show="frmJenisItem.message.$invalid && frmJenisItem.message.$touched">Field message harus diisi</span>
                                             </div>
                                         </div>
 
@@ -86,7 +104,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, item.id, '{{ csrf_token() }}')" ng-disabled="frmItem.$invalid">Save changes</button>
+                                    <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, jenisitem.id, '{{ csrf_token() }}')" ng-disabled="frmJenisItem.$invalid">Save changes</button>
                                 </div>
                             </div>
                         </div>
@@ -116,6 +134,6 @@
         
         <!-- AngularJS Application Scripts -->
         <script src="<?= asset('app/app.js') ?>"></script>
-        <script src="<?= asset('app/controllers/item.js') ?>"></script>
+        <script src="<?= asset('app/controllers/jenisitem.js') ?>"></script>
     </body>
 </html>

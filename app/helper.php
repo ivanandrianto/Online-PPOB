@@ -8,6 +8,14 @@ function isAdmin()
 	return 0;
 }
 
+function isSoftwareEngineer()
+{
+	if(!isAdmin())
+		return 0;
+	else
+		return (strcmp(Auth::guard('admin')->user()->type,"software_engineer") == 0);
+}
+
 function isMerchant()
 {
 	if (Auth::guard('merchant')->check()){

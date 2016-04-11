@@ -64,6 +64,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/merchant/register', 'MerchantController@addMerchant');*/
     /* END OF MERCHANT */
 
+    /* JENISITEM */
+    /* JenisItem - Admin */
+    Route::get('/admin/jenis-item', 'JenisItemController@getView');
+    Route::get('/api/v1/jenisitem/getAll/', 'JenisItemController@getAllJenisItem');
+    Route::get('/api/v1/jenisitem/get/{id}', 'JenisItemController@getJenisItem');
+    Route::post('/api/v1/jenisitem/add', 'JenisItemController@addJenisItem');
+    Route::post('/api/v1/jenisitem/edit/{id}', 'JenisItemController@editJenisItem');
+    Route::delete('/api/v1/jenisitem/delete/{id}', 'JenisItemController@destroy');
+
     /* ITEM */
     /* Item - Admin */
     Route::get('/admin/items', 'ItemsController@getView');
@@ -71,7 +80,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/api/v1/item/get/{id}', 'ItemsController@getItem');
     Route::post('/api/v1/item/add', 'ItemsController@addItem');
     Route::post('/api/v1/item/edit/{id}', 'ItemsController@editItem');
-    Route::delete('/api/v1/item/delete/{id}', 'ItemsController@deleteItem');
+    Route::delete('/api/v1/item/delete/{id}', 'ItemsController@destroy');
 
     /* Item - Merchant/Admin */
     Route::get('/api/v1/item/getAllJenis/', 'ItemsController@getAllJenisItem');
