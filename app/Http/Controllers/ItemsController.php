@@ -10,7 +10,7 @@ use App\JenisItem;
 class ItemsController extends Controller
 {
     public function __construct(){
-        if(!isAuthenticated())
+        if(!isSoftwareEngineer())
             return Redirect::to('/')->send();
     }
     public function getView(){

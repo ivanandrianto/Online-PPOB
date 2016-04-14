@@ -112,4 +112,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('merchant/help', function () {
         return view('merchant.help.help');
     });
+
+    /* KEUNTUNGAN */
+    Route::get('/api/v1/keuntungan/generate', 'KeuntunganController@generate');
+    Route::get('/admin/keuntungan/{date?}', 'KeuntunganController@getView');
 });
