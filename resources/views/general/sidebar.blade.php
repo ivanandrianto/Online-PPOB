@@ -4,9 +4,8 @@
 			      <li><a href="/merchant/transaksi/history" target="_self"> <i class="fa fa-th"></i> Histori Transaksi</a></li>
 			      <li><a href="/merchant/help" target="_self"> <i class="fa fa-th"></i> Help </a></li>
 			      
-				      <div class="hidden-menu"><li><a href="/merchant/mymerchant"><i class="fa fa-th"></i> My Merchant </a></li></div>
-				     <div class="hidden-menu"><li><a href="/merchant/change-pass"><i class="fa fa-th"></i> Change password </a></li></div>
-				     <div class="hidden-menu"><li><a href="/merchant/logout"><i class="fa fa-th"></i> Logout </a></li></div>
+				     <div class="hidden-menu"><li><a href="/merchant/mymerchant" target="_self"><i class="fa fa-th"></i> My Merchant </a></li></div>
+				     <div class="hidden-menu"><li><a href="/merchant/logout" target="_self"><i class="fa fa-th"></i> Logout </a></li></div>
 
 			    </ul>
 			</div>

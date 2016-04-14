@@ -1,7 +1,7 @@
 
 
 
-appLoginMerchant.controller('LoginMerchantController', function($scope, $location, $http, API_URL) {    
+appLoginAdmin.controller('LoginAdminController', function($scope, $location, $http, API_URL) {    
     
     $scope.save = function(csrf_token) {
         $.ajaxSetup({
@@ -14,8 +14,8 @@ appLoginMerchant.controller('LoginMerchantController', function($scope, $locatio
         //alert($scope.kebutuhan.kebutuhan_pendidikan);
 
         var data = $.param({
-            'email'         : $scope.merchant.email,
-            'password'      : $scope.merchant.password
+            'email'         : $scope.admin.email,
+            'password'      : $scope.admin.password
         });
 
         $http({
@@ -26,7 +26,7 @@ appLoginMerchant.controller('LoginMerchantController', function($scope, $locatio
         }).success(function(response) {
             console.log(response);
             if(response == 1){
-                window.location = '/merchant/dashbaord';
+                window.location = '/admin/dashbaord';
             } else {
                 $scope.error = response;
             }

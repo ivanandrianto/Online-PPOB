@@ -109,9 +109,9 @@ class AuthController extends Controller
                 'password'  => Input::get('password')
             );
             if (Auth::attempt($admindata)) {
-                return Redirect::to('/admin');
+                return 1;
             } else {
-                return Redirect::to('/admin/login');
+                return "Username and password not match";
             }
 
         }
