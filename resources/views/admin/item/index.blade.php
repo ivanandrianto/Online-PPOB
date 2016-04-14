@@ -76,7 +76,7 @@
                                             <label for="harga" class="col-sm-3 control-label">Harga</label>
                                             <div class="col-sm-9">
                                                 <input required type="text" class="form-control has-error" id="harga" name="harga" placeholder="Harga" value="<% harga %>" 
-                                                ng-model="item.harga" ng-required="true">
+                                                ng-model="item.harga" ng-required="false">
                                                 <span class="help-inline" 
                                                 ng-show="frmItem.harga.$invalid && frmItem.harga.$touched">Field harga harus diisi</span>
                                             </div>

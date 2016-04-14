@@ -25,7 +25,7 @@ class ItemsController extends Controller
         $rules = array(
             'nama'      => 'required',
             'jenis'     => 'required',
-            'harga'     => 'required|integer'
+            'harga'     => 'integer'
         );
         return Validator::make(Input::all(), $rules);
     }

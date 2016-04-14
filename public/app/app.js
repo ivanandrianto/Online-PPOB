@@ -94,3 +94,16 @@ var appMyMerchant = angular.module('MyMerchantRecords', [], function($interpolat
             requireBase: false
         })
     });
+
+var appLoginAdmin = angular.module('LoginAdminRecords', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    })
+    .constant('API_URL', 'http://localhost:8000/admin/login/')
+    .config(function($locationProvider){
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        })
+    });
+

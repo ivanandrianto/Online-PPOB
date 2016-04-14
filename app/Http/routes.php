@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('admin/register', 'AdminAuth\AuthController@showRegistrationForm');
     Route::post('admin/register', 'AdminAuth\AuthController@register');
 
-    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin/dashbaord', 'AdminController@index');
 
     /* Login Routes Merchant */
     Route::get('/merchant/login','MerchantAuth\AuthController@showLoginForm');
