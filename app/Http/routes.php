@@ -56,6 +56,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/api/v1/merchant/edit/{id}', 'MerchantController@editMerchant');
     Route::delete('/api/v1/merchant/delete/{id}', 'MerchantController@deleteMerchant');
 
+    /* Merchant - Merchant */
+    Route::get('/merchant/editMyMerchant', 'MerchantController@editMyMerchantView');
+    Route::get('/api/v1/my-merchant/get', 'MerchantController@getMyMerchant');
+    Route::post('/api/v1/my-merchant/edit', 'MerchantController@editMyMerchant');
+    /*Route::get('/merchant/register', function () {
+        return view('merchant.index');
+
     /* Merchant - Public */
     Route::get('/merchant', 'MerchantController@getView');
     /*Route::get('/merchant/register', function () {
@@ -100,4 +107,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('merchant/transaksi/item/{id}', 'TransaksiController@selectItem');
     Route::post('merchant/transaksi/do', 'TransaksiController@performTransaction');
     Route::get('merchant/transaksi/history/{date?}', 'TransaksiController@getMyTransactions');
+
+    /* HELP */
+    Route::get('merchant/help', function () {
+        return view('merchant.help.help');
+    });
 });

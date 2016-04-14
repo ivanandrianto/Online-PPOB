@@ -11,13 +11,13 @@
 		</div>
 		<div class="collapse navbar-collapse" id="example-navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">MyMerchant</a></li>
+				<li><a href="/merchant/editMyMerchant">MyMerchant</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							Account <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Logout</a></li>
+						<li><a href="/merchant/logout">Logout</a></li>
 					</ul>
 				</li>
 			</ul>

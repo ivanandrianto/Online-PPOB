@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Merchant;
+use Auth;
 
 class MerchantController extends Controller
 {
@@ -195,6 +196,13 @@ class MerchantController extends Controller
 		return 1;
     }
 
+    public function editMyMerchantView(Request $request) {
+        if(!isMerchantApproved())
+            return Redirect::to('/');
+
+        return view('merchant.merchant.edit');
+
+    }
 
 
     /**
@@ -203,7 +211,23 @@ class MerchantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return Response
      */
-    public function editMyMerchant(Request $request, $id) {
+    public function getMyMerchant() {
+        if(!isMerchantApproved())
+            return "Not allowed";
+
+        $id_merchant_auth = Auth::guard('merchant')->user()->id;
+        return Merchant::find($id_merchant_auth);
+
+    }
+
+
+    /**
+     * Edit a Merchant by Merhant
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return Response
+     */
+    public function editMyMerchant(Request $request) {
         if(!isMerchantApproved())
             return "Not allowed";
 
@@ -217,24 +241,19 @@ class MerchantController extends Controller
         } else {
 
             /* Validate phone number */
-            if (!preg_match('/^[0-9]+$/', Input::get('no_telp'))){
+            if (!preg_match('/^[0-9]+$/', Input::get('telepon'))){
                 return "No. Telp tidak valid. Hanya boleh mengandung angka";
             }
 
-            $merchant = Merchant::find($id);
-            if(!$merchant = Merchant::find($id))
-                return "Not found";
-
             $id_merchant_auth = Auth::guard('merchant')->user()->id;
-            $id_merchant = $merchant->id;
-            if($id_merchant_auth!=$id_merchant)
-                return "You're not authorized";
+            $merchant = Merchant::find($id_merchant_auth);
+            if(!$merchant)
+                return "Not found";
 
             $merchant->nama                 = Input::get('nama');
             $merchant->alamat               = Input::get('alamat');
             $merchant->telepon              = Input::get('telepon');
             $merchant->email                = Input::get('email');
-            $merchant->status               = "Diproses";
             $merchant->save();
             return 1;
         }

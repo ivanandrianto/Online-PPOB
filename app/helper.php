@@ -24,6 +24,14 @@ function isAccountant()
 		return (strcmp(Auth::guard('admin')->user()->type,"accountant") == 0);
 }
 
+function isSurveyor()
+{
+	if(!isAdmin())
+		return 0;
+	else
+		return (strcmp(Auth::guard('admin')->user()->type,"surveyor") == 0);
+}
+
 
 function isMerchant()
 {

@@ -12,8 +12,14 @@ class AdminController extends Controller
 {
     public function __construct(){
         $this->middleware('admin');
-   }
-public function index(){
-        return view('admin.dashboard');
+    }
+    public function index(){
+    	if(isSoftwareEngineer()){
+            return view('admin.dashboard-se');
+    	} else if(isAccountant()) {
+            return view('admin.dashboard-accountant');
+        } else if(isSurveyor()) {
+            return view('admin.dashboard-surveyor');
+        }
     }
 }

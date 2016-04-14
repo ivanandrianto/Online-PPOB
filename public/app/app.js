@@ -82,3 +82,15 @@ var appPermohonan = angular.module('PermohonanRecords', [], function($interpolat
             requireBase: false
         })
     });
+
+var appMyMerchant = angular.module('MyMerchantRecords', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    })
+    .constant('API_URL', 'http://localhost:8000/api/v1/my-merchant/')
+    .config(function($locationProvider){
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        })
+    });
