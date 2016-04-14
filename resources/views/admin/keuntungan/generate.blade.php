@@ -15,10 +15,17 @@
                         <h1>Transaksi</h1>
                 </div>
             </div>
+            
+            
             <div class="row">
+                
+                
                 <!-- content -->
                 <div class="col-xs-12  col-sm-8 col-md-9 content">           
                     <h2>History Transaksi </h2>
+                    @if(isset($date))
+                        <h3>{{ $date }}</h3>
+                    @endif
 
                       Date:
                     @if(isset($date))
@@ -26,17 +33,7 @@
                     @else
                         <input type="date" name="date" id="date">
                     @endif
-                    <select name="merchant_id" id="merchant_id">
-                        <option value="0" selected>All</option>
-                        @foreach($merchants as $merchant)
-                        @if($merchant->id == $merchant_id)
-                        <option value="{{ $merchant->id }}" selected>{{ $merchant->nama }}</option>
-                        @else
-                        <option value="{{ $merchant->id }}">{{ $merchant->nama }}</option>
-                        @endif
-                        @endforeach
-                    </select>
-                    <button type="submit" name="date-filter-btn" id="date-filter-btn" onClick="filterDate()">Filter</button>
+                        <button type="submit" name="date-filter-btn" id="date-filter-btn" onClick="filterDate()">Filter</button>
                     
                     <table class="table">
                     <thead>
@@ -48,7 +45,7 @@
                     @foreach($keuntungans as $keuntungan)
                         <tr>
                             <td>{{ $keuntungan->tanggal }}</td>
-                            <td>{{ $keuntungan->merchant->nama }}</td>
+                            <td>{{ $keuntungan->merchant_id }}</td>
                             <td>{{ $keuntungan->jumlah }}</td>
                         </tr>
                     @endforeach
@@ -61,19 +58,10 @@
         @include('general.bottom-scripts')
         <script type="text/javascript">
             var filterDate = function(){
-
-                var url = "/admin/keuntungan?";
-
                 var date = document.getElementById("date").value;
-
-                if((date != null) && (date.length>0)){                    
-                    url+="date="+date+"&";
+                if(date.length>0){
+                    window.location = "/admin/keuntungan/" + date;
                 }
-                var merchant_id = document.getElementById("merchant_id").value;
-                if(merchant_id != null){
-                    url+="merchant="+merchant_id;
-                }
-                window.location = url;
             }
         </script>
     </body>

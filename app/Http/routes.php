@@ -115,5 +115,5 @@ Route::group(['middleware' => ['web']], function () {
 
     /* KEUNTUNGAN */
     Route::get('/api/v1/keuntungan/generate', 'KeuntunganController@generate');
-    Route::get('/admin/keuntungan/{date?}', 'KeuntunganController@getView');
+    Route::get('/admin/keuntungan', 'KeuntunganController@getView');
 });

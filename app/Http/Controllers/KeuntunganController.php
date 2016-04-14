@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use DB;
 use App\Keuntungan;
 use App\Transaksi;
+use App\Merchant;
 
 class KeuntunganController extends Controller
 {
@@ -17,18 +18,30 @@ class KeuntunganController extends Controller
             return Redirect::to('/')->send();
    	}
 
-   	public function getView($date = null){
-		if($date == null){
-			$keuntungans = Keuntungan::with('merchant')->orderBy('tanggal','desc')->paginate(20);
-			return view('admin.keuntungan.index',compact('keuntungans'));
-		} else {
-			$keuntungans = Keuntungan::with('merchant')->whereDate('tanggal','=',$date)->orderBy('tanggal','desc')->paginate(20);
-			return view('admin.keuntungan.index',compact(['keuntungans','date']));
-		}
+   	public function getView(){
+
+         $merchants = Merchant::where('status','=','Diterima')->orderBy('id','asc')->get();
+         $keuntungans = Keuntungan::with('merchant');
+         $date=Input::get('date');
+         $merchant_id=Input::get('merchant');
+         $base_url = "/admin/keuntungan?";
+         if($merchant_id==0)
+            $merchant_id=null;
+         if($merchant_id!=null){
+            $keuntungans->where('merchant_id','=',$merchant_id);
+            $base_url .= "merchant=" . $merchant_id;
+         }
+         if($date!=null){
+            $keuntungans->whereDate('tanggal','=',$date);
+            $base_url .= "date=" . $date;
+         }
+         $keuntungans=$keuntungans->paginate(20);
+         $keuntungans=$keuntungans->setPath($base_url);
+         return view('admin.keuntungan.index',compact(['keuntungans','date','merchants','merchant_id']));
    	}
 
    	public function generateRequestView($date = null){
-		return view('admin.keuntungan.generate');
+         return view('admin.keuntungan.generate');
    	}
 
    	public function generate(){
