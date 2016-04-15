@@ -19,10 +19,11 @@
                 <div class="col-xs-12  col-sm-8 col-md-9 content">
                     Date:
                     @if(isset($date))
-                        <input type="date" name="date" id="date" value="{{ $date }}">
+                        <input name="date" id="date" value="{{ $date }}">
                     @else
-                        <input type="date" name="date" id="date">
+                        <input name="date" id="date">
                     @endif
+                    Merchant:
                     <select name="merchant_id" id="merchant_id">
                         <option value="0" selected>All</option>
                         @foreach($merchants as $merchant)
@@ -57,6 +58,9 @@
         </div>
         @include('general.bottom-scripts')
         <script type="text/javascript">
+            $(function() {
+                 $( "#date" ).datepicker({ dateFormat: 'yy-mm-dd'}); 
+            });
             var filterDate = function(){
 
                 var url = "/admin/keuntungan?";
@@ -73,5 +77,12 @@
                 window.location = url;
             }
         </script>
+        <link href="<?= asset('css/jquery-ui.css') ?>" rel="stylesheet">
+        <script>
+             $(function() {
+                $( "#date" ).datepicker();
+             });
+        </script>
+        
     </body>
 </html>

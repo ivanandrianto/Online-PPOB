@@ -97,6 +97,7 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
                 method: 'DELETE',
                 url: API_URL + 'delete/' + id
             }).success(function(response) {
+                console.log(response);
                 if(response == 1){
                     location.reload();
                 } else {

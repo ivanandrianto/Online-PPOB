@@ -52,7 +52,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/api/v1/merchant/getAll/', 'MerchantController@getAllMerchant');
     Route::get('/api/v1/merchant/get/{id}', 'MerchantController@getMerchant');
     Route::post('/api/v1/merchant/edit/{id}', 'MerchantController@editMerchant');
-    Route::delete('/api/v1/merchant/delete/{id}', 'MerchantController@deleteMerchant');
+    Route::delete('/api/v1/merchant/delete/{id}', 'MerchantController@destroy');
 
     /* Merchant - Merchant */
     Route::get('/merchant/editMyMerchant', 'MerchantController@editMyMerchantView');
