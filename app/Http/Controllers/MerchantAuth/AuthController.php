@@ -166,10 +166,10 @@ class AuthController extends Controller
             $insertedId = $merchant->id;
 
             //save to permohonan
-            $permohonan = new Permohonan;
+            /*$permohonan = new Permohonan;
             $permohonan->merchant_id      = $insertedId;
             $permohonan->status           = "Diproses";
-            $permohonan->save();
+            $permohonan->save();*/
 
             return 1;
         }

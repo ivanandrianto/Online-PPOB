@@ -40,7 +40,7 @@ class KeuntunganController extends Controller
          return view('admin.keuntungan.index',compact(['keuntungans','date','merchants','merchant_id']));
    	}
 
-   	public function generateRequestView($date = null){
+   	public function getGenerateView(){
          return view('admin.keuntungan.generate');
    	}
 
@@ -66,6 +66,6 @@ class KeuntunganController extends Controller
    				$date = date("Y-m-d",strtotime("+1 day", strtotime($date)));
    			}
    		}
-   		return 1;
+   		return "Keuntungan berhasil digenerate";
    	}
 }

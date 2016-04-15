@@ -4,6 +4,7 @@
 appLoginAdmin.controller('LoginAdminController', function($scope, $location, $http, API_URL) {    
     
     $scope.save = function(csrf_token) {
+        alert('save');
         $.ajaxSetup({
             headers: {
                 'X-XSRF-Token': csrf_token

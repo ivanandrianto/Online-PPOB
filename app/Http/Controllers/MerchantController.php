@@ -42,6 +42,13 @@ class MerchantController extends Controller
         }
     }
 
+    public function getViewAdmin(){
+        if(isAuthenticated() && isAdmin())
+            return view('admin.merchant.index');
+        else
+            return Redirect::to('/');
+    }
+
     public function showDashboard(){
         if(!isMerchant())
             return Redirect::to('/');

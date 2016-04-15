@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                        <h1>Keuntungan</h1>
+                        <h1>Transaksi</h1>
                 </div>
             </div>
             <div class="row">
@@ -37,29 +37,33 @@
                     
                     <table class="table">
                     <thead>
+                        <th>ID</th>
                         <th>Tanggal</th>
                         <th>Merchant</th>
-                        <th>Jumlah</th>
+                        <th>Item</th>
+                        <th>Harga</th>
                     </thead>
                     <tbody>
-                    @foreach($keuntungans as $keuntungan)
+                    @foreach($transaksis as $transaksi)
                         <tr>
-                            <td>{{ $keuntungan->tanggal }}</td>
-                            <td>{{ $keuntungan->merchant->nama }}</td>
-                            <td>{{ $keuntungan->jumlah }}</td>
+                            <td>{{ $transaksi->id }}</td>
+                            <td>{{ $transaksi->created_at }}</td>
+                            <td>{{ $transaksi->merchant->nama }}</td>
+                            <td>{{ $transaksi->item->nama }}</td>
+                            <td>{{ $transaksi->harga }}</td>
                         </tr>
                     @endforeach
                     </tbody>
                     </table>
                 </div>
-                {{ $keuntungans->links() }}
+                {{ $transaksis->links() }}
             </div>
         </div>
         @include('general.bottom-scripts')
         <script type="text/javascript">
             var filterDate = function(){
 
-                var url = "/admin/keuntungan?";
+                var url = "/admin/transaksi?";
 
                 var date = document.getElementById("date").value;
 

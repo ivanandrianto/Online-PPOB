@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Transaksi;
 use App\JenisItem;
 use App\Item;
+use App\Merchant;
 
 class TransaksiController extends Controller
 {
@@ -87,8 +88,24 @@ class TransaksiController extends Controller
 
     public function getAllTransactions(){
     	if(isAccountant()){
-    		$transaksis = Transaksi::with('merchant')->with('item')->orderBy('created_at','desc')->paginate(20);
-    		return view('admin.transaksi.history',compact('transaksis'));
+            $merchants = Merchant::where('status','=','Diterima')->orderBy('id','asc')->get();
+            $transaksis = Transaksi::with('merchant')->with('item');
+            $date=Input::get('date');
+            $merchant_id=Input::get('merchant');
+            $base_url = "/admin/transaksi?";
+            if($merchant_id==0)
+                $merchant_id=null;
+            if($merchant_id!=null){
+                $transaksis->where('merchant_id','=',$merchant_id);
+                $base_url .= "merchant=" . $merchant_id;
+            }
+            if($date!=null){
+                $transaksis->whereDate('created_at','=',$date);
+                $base_url .= "date=" . $date;
+            }
+    		$transaksis=$transaksis->paginate(20);
+            $transaksis=$transaksis->setPath($base_url);
+    		return view('admin.transaksi.history',compact(['transaksis','date','merchants','merchant_id']));
     	}
     }
 

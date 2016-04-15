@@ -7,7 +7,7 @@
 
   	<body>
 
-		@include('general.navbar_wo_sidebar')
+		@include('general.navbar-admin')
 		<div class="col-md-12 merchant-welcome">
 			<div id="welcome-text">
 				<h2>Welcome Software Engineer</h2>
