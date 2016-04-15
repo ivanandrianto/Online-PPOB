@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Permohonan extends Model
+class Keuntungan extends Model
 {
-    protected $table = 'permohonan';
+    protected $table = 'keuntungan';
 
     public function merchant(){
     	return $this->hasOne('App\Merchant', 'id', 'merchant_id');

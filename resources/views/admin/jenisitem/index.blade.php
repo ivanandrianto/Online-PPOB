@@ -9,10 +9,17 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
     </head>
     <body ng-controller="JenisItemController">
-        <div class="mycontainer">
-            <div class="content" style="width:900px;height:100%">
-                <h2>JenisItem</h2>
-                <div>
+        @include('general.navbar-admin')
+        <div class="container mycontainer">
+            <div class="row">
+                <div class="col-md-12">
+                        <h1>Jenis Item</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                @include('general.sidebar-se')
+                <div class="col-xs-12  col-sm-8 col-md-9 content">
                     <table class="table">
                         <thead>
                             <tr>
@@ -38,102 +45,94 @@
                             </tr>
                         </tbody>
                     </table>
-                    <!-- End of Table-to-load-the-data Part -->
-                    <!-- Modal (Pop up when detail button clicked) -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <h4 class="modal-title" id="myModalLabel"><% form_title %></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <% error %>
-                                    <form name="frmJenisItem" class="form-horizontal" novalidate="">
-                                        <input id="_token" name="_token" type="hidden" value="<?php echo csrf_token(); ?>"
-                                        ng-model="jenisitem._token">
+                </div>    
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title" id="myModalLabel"><% form_title %></h4>
+                            </div>
+                            <div class="modal-body">
+                                <% error %>
+                                <form name="frmJenisItem" class="form-horizontal" novalidate="">
+                                    <input id="_token" name="_token" type="hidden" value="<?php echo csrf_token(); ?>"
+                                    ng-model="jenisitem._token">
 
-                                        <div class="form-group error">
-                                            <label for="jenis" class="col-sm-3 control-label">Jenis</label>
-                                            <div class="col-sm-9">
-                                                <input required type="text" class="form-control has-error" id="jenis" name="jenis" placeholder="Jenis" value="<% jenis %>" 
-                                                ng-model="jenisitem.jenis" ng-required="true">
-                                                <span class="help-inline" 
-                                                ng-show="frmJenisItem.jenis.$invalid && frmJenisItem.jenis.$touched">Field jenis harus diisi</span>
-                                            </div>
+                                    <div class="form-group error">
+                                        <label for="jenis" class="col-sm-3 control-label">Jenis</label>
+                                        <div class="col-sm-9">
+                                            <input required type="text" class="form-control has-error" id="jenis" name="jenis" placeholder="Jenis" value="<% jenis %>" 
+                                            ng-model="jenisitem.jenis" ng-required="true">
+                                            <span class="help-inline" 
+                                            ng-show="frmJenisItem.jenis.$invalid && frmJenisItem.jenis.$touched">Field jenis harus diisi</span>
                                         </div>
+                                    </div>
 
 
-                                        <div class="form-group error">
-                                            <label for="hasSelections" class="col-sm-3 control-label">hasSelections</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control has-error" id="hasSelections" name="hasSelections" 
-                                                    ng-init="jenisitem.hasSelections=hasSelections_list[0]['value']"
-                                                    ng-model="jenisitem.hasSelections"
-                                                    ng-options="x.value as x.name for x in hasSelections_list" ng-required="true"
-                                                >
-                                                </select>
-                                                <span class="help-inline" 
-                                                ng-show="frmJenisItem.hasSelections.$invalid && frmJenisItem.hasSelections.$touched">Field hasSelections harus diisi</span>
-                                            </div>
+                                    <div class="form-group error">
+                                        <label for="hasSelections" class="col-sm-3 control-label">hasSelections</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control has-error" id="hasSelections" name="hasSelections" 
+                                                ng-init="jenisitem.hasSelections=hasSelections_list[0]['value']"
+                                                ng-model="jenisitem.hasSelections"
+                                                ng-options="x.value as x.name for x in hasSelections_list" ng-required="true"
+                                            >
+                                            </select>
+                                            <span class="help-inline" 
+                                            ng-show="frmJenisItem.hasSelections.$invalid && frmJenisItem.hasSelections.$touched">Field hasSelections harus diisi</span>
                                         </div>
+                                    </div>
 
-                                        
+                                    
 
-                                        <div class="form-group error">
-                                            <label for="title" class="col-sm-3 control-label">Title</label>
-                                            <div class="col-sm-9">
-                                                <input required type="text" class="form-control has-error" id="title" name="title" placeholder="Title" value="<% title %>" 
-                                                ng-model="jenisitem.title" ng-required="true">
-                                                <span class="help-inline" 
-                                                ng-show="frmJenisItem.title.$invalid && frmJenisItem.title.$touched">Field title harus diisi</span>
-                                            </div>
+                                    <div class="form-group error">
+                                        <label for="title" class="col-sm-3 control-label">Title</label>
+                                        <div class="col-sm-9">
+                                            <input required type="text" class="form-control has-error" id="title" name="title" placeholder="Title" value="<% title %>" 
+                                            ng-model="jenisitem.title" ng-required="true">
+                                            <span class="help-inline" 
+                                            ng-show="frmJenisItem.title.$invalid && frmJenisItem.title.$touched">Field title harus diisi</span>
                                         </div>
+                                    </div>
 
-                                        <div class="form-group error">
-                                            <label for="message" class="col-sm-3 control-label">Message</label>
-                                            <div class="col-sm-9">
-                                                <input required type="text" class="form-control has-error" id="message" name="message" placeholder="Message" value="<% jenis %>" 
-                                                ng-model="jenisitem.message" ng-required="true">
-                                                <span class="help-inline" 
-                                                ng-show="frmJenisItem.message.$invalid && frmJenisItem.message.$touched">Field message harus diisi</span>
-                                            </div>
+                                    <div class="form-group error">
+                                        <label for="message" class="col-sm-3 control-label">Message</label>
+                                        <div class="col-sm-9">
+                                            <input required type="text" class="form-control has-error" id="message" name="message" placeholder="Message" value="<% jenis %>" 
+                                            ng-model="jenisitem.message" ng-required="true">
+                                            <span class="help-inline" 
+                                            ng-show="frmJenisItem.message.$invalid && frmJenisItem.message.$touched">Field message harus diisi</span>
                                         </div>
+                                    </div>
 
 
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, jenisitem.id, '{{ csrf_token() }}')" ng-disabled="frmJenisItem.$invalid">Save changes</button>
-                                </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, jenisitem.id, '{{ csrf_token() }}')" ng-disabled="frmJenisItem.$invalid">Save changes</button>
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                </div>
-                                <div class="modal-body">
-                                    <% successMessage %>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" id="btn-ok" ng-click="ok()">OK</button>
-                                </div>
+                </div>
+                <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <% successMessage %>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btn-ok" ng-click="ok()">OK</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="<?= asset('app/lib/angular/angular.min.js') ?>"></script>
-        <script src="<?= asset('js/jquery.min.js') ?>"></script>
-        <script src="<?= asset('js/bootstrap.min.js') ?>"></script>
-        <script src="<?= asset('js/angular-route.min.js') ?>"></script>
-        
-        <!-- AngularJS Application Scripts -->
-        <script src="<?= asset('app/app.js') ?>"></script>
+        @include('general.bottom-scripts')
         <script src="<?= asset('app/controllers/jenisitem.js') ?>"></script>
     </body>
 </html>

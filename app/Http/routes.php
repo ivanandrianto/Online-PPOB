@@ -39,7 +39,7 @@ Route::group(['middleware' => ['web']], function () {
     /* END OF AUTHENTICATION ROUTES */
 
     Route::get('/', function () {
-        return view('welcome');
+        return view('merchant.welcome');
     });
 
     /* DASHBOARD */
@@ -48,9 +48,7 @@ Route::group(['middleware' => ['web']], function () {
 
     /* MERCHANT */
     /* Merchant - Admin */
-    Route::get('/admin/merchant', function () {
-        return view('admin.merchant.index');
-    });
+    Route::get('/admin/merchant', 'MerchantController@getViewAdmin');
     Route::get('/api/v1/merchant/getAll/', 'MerchantController@getAllMerchant');
     Route::get('/api/v1/merchant/get/{id}', 'MerchantController@getMerchant');
     Route::post('/api/v1/merchant/edit/{id}', 'MerchantController@editMerchant');
@@ -108,8 +106,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('merchant/transaksi/do', 'TransaksiController@performTransaction');
     Route::get('merchant/transaksi/history/{date?}', 'TransaksiController@getMyTransactions');
 
+    /* Transaksi - Admin */
+     Route::get('admin/transaksi', 'TransaksiController@getAllTransactions');
+
     /* HELP */
     Route::get('merchant/help', function () {
         return view('merchant.help.help');
     });
+
+    /* KEUNTUNGAN */
+    Route::get('/api/v1/keuntungan/generate', 'KeuntunganController@generate');
+    Route::get('/admin/keuntungan', 'KeuntunganController@getView');
+    Route::get('/admin/keuntungan/generate', 'KeuntunganController@getGenerateView');
 });

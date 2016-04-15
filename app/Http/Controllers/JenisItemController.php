@@ -111,8 +111,7 @@ class JenisItemController extends Controller
         if(!$jenisitem)
             return "Not Found";
 
-        /* Check inTransaction */
-        $count = Item::where('jenis','=',$jenisitem->id)->count();
+        $count = Item::where('jenis','=',$id)->count();
         if($count > 0)
             return "Cannot delete";
         

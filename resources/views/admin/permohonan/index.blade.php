@@ -32,7 +32,7 @@
                         <tbody>
                             <tr ng-repeat="permohonan in permohonans">
                                 <td><% permohonan.id %></td>
-                                <td><% permohonan.merchant.nama %></td>
+                                <td><% permohonan.nama %></td>
                                 <td><% permohonan.created_at %></td>
                                 <td><% permohonan.status %></td>
                                 <td ng-hide="permohonan.status!='Diproses'">

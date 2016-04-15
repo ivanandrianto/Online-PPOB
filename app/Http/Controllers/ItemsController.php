@@ -10,7 +10,7 @@ use App\JenisItem;
 class ItemsController extends Controller
 {
     public function __construct(){
-        if(!isAuthenticated())
+        if(!isSoftwareEngineer())
             return Redirect::to('/')->send();
     }
     public function getView(){
@@ -57,8 +57,6 @@ class ItemsController extends Controller
      * @return Response
      */
     public function addItem(Request $request) {
-        if(!isAdmin())
-            return Redirect::to('/')->send();
        /* Validation with Laravel built-in validator*/
        $validator = $this->validateInput($request);
         if ($validator->fails()) {
@@ -82,8 +80,6 @@ class ItemsController extends Controller
      * @return Response
      */
     public function editItem(Request $request,$id) {
-        if(!isAdmin())
-            return Redirect::to('/')->send();
        /* Validation with Laravel built-in validator*/
        $validator = $this->validateInput($request);
         if ($validator->fails()) {
@@ -109,13 +105,13 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        if(!isAdmin())
-            return Redirect::to('/')->send();
         $item = Item::find($id);
         if(!$item)
-                return "Not Found";
-        /* Check inTransaction */
-        /* Belum diimplementasikan */
+            return "Not Found";
+        
+        $count = Transaksi::where('item_id','=',$id)->count();
+        if($count>0)
+            return "Cannot delete";
         
         $item->delete();
         return 1;

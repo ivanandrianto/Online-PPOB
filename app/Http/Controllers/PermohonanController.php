@@ -7,19 +7,17 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
-use App\Permohonan;
 use App\Merchant;
 
 class PermohonanController extends Controller
 {
 	public function __construct(){
 		/* Hanya surveyor */
-        if(!isAdmin())
+        if(!isSurveyor())
         	return Redirect::to('/')->send();
    	}
 
     public function getView(){
-    	/* Hanya surveyor */
         return view('admin.permohonan.index');
     }
 
@@ -29,12 +27,17 @@ class PermohonanController extends Controller
      * @return Response
      */
     public function getAllPermohonan($status = null){
-    	/* Hanya surveyor */
-    	if($status == null){
+    	/*if($status == null){
 			 return Permohonan::with('merchant')->orderBy('created_at','desc')->get();
     	} else {
     		return Permohonan::with('merchant')->where('status','=',$status)->orderBy('created_at','desc')->get();
-    	}
+    	}*/
+
+      if($status == null){
+        return Merchant::select('id', 'nama', 'created_at', 'status')->orderBy('created_at','desc')->get();
+      } else {
+        return Merchant::select('id', 'nama', 'created_at', 'status')->where('status','=',$status)->orderBy('created_at','desc')->get();
+      }
     }
 
     /**
@@ -45,7 +48,8 @@ class PermohonanController extends Controller
      */
 	public function getPermohonan($id) {
 		/* Hanya surveyor */
-        return Permohonan::with('merchant')->get()->find($id);
+        //return Permohonan::with('merchant')->get()->find($id);
+        return Merchant::find($id)->pluck(['id','nama','created_at']);
     }
 
     /**
@@ -60,7 +64,7 @@ class PermohonanController extends Controller
        	if(($type!=0) && ($type!=1))
        		return "";
 
-       	$permohonan = Permohonan::find($id);
+       	/*$permohonan = Permohonan::find($id);
        	if(!$permohonan)
        		return "not found";
 
@@ -78,7 +82,20 @@ class PermohonanController extends Controller
        	$permohonan->status=$status;
        	$merchant->status=$status;
        	$permohonan->save();
-       	$merchant->save();
+       	$merchant->save();*/
+
+        $merchant = Merchant::find($id);
+        if(!$merchant)
+          return "not found";
+
+        $status="";
+        if($type==0){//ditolak
+          $status="Ditolak";
+        } else if($type==1){//diterima
+          $status="Diterima";
+        }
+        $merchant->status=$status;
+        $merchant->save();
         return 1;
     }
 }

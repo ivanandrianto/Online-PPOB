@@ -24,7 +24,7 @@
                     <div class="col-sm-10 input">
                         <input required type="password" class="form-control has-error" id="password" name="password"
                         placeholder="Masukkan password" 
-                        ng-model="admin.password" ng-required="true">
+                        ng-model="admin.password" ng-required="true" ng-keyup="$event.keyCode == 13 && save('{{ csrf_token() }}')">
                         <span class="help-inline" ng-show="frmLoginAdmin.password.$invalid && frmLoginAdmin.password.$touched">Required</span>
                     </div>
                     <div class="buttonSubmit">
