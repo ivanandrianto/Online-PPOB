@@ -27,7 +27,9 @@
                         ng-model="admin.password" ng-required="true">
                         <span class="help-inline" ng-show="frmLoginAdmin.password.$invalid && frmLoginAdmin.password.$touched">Required</span>
                     </div>
-                    <button type="button" class="btn btn-primary" id="btn-save" ng-click="save('{{ csrf_token() }}')" ng-disabled="frmLoginAdmin.$invalid">Login</button>
+                    <div class="buttonSubmit">
+                        <button type="button" class="btn btn-primary" id="btn-save" ng-click="save('{{ csrf_token() }}')" ng-disabled="frmLoginAdmin.$invalid">Login</button>
+                    </div>
                 </div>
             </form>
         </div>

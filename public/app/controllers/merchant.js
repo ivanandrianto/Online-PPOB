@@ -58,7 +58,6 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
             data: $.param($scope.merchant),
             headers: {'Content-Type': 'application/x-www-form-urlencoded',}
         }).success(function(response) {
-            alert(response);
             if(response == 1){
                 $('#myModal').modal('hide');
                 if (modalstate === 'edit'){
@@ -97,6 +96,7 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
                 method: 'DELETE',
                 url: API_URL + 'delete/' + id
             }).success(function(response) {
+                alert(response);
                 if(response == 1){
                     location.reload();
                 } else {

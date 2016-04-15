@@ -105,6 +105,17 @@ h3{font-weight: 300; font-size: 22px;margin-bottom: 40px}
 .error-msg{
     color: #ff0000;
 }
+
+.login-form{
+    width: 50%;
+    margin: auto;
+}
+
+.buttonSubmit{
+    width: 5%;
+    margin: 50px auto 0 auto;
+
+}
 /* collapsed sidebar styles */
 @media screen and (max-width: 767px) {
     .registration-form{

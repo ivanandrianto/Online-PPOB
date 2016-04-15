@@ -1,7 +1,7 @@
 
 
 appRegMerchant.controller('RegMerchantController', function($scope, $location, $http, API_URL) {    
-    $scope.error = "gila";
+    $scope.error = "";
     $scope.save = function(csrf_token) {
         $.ajaxSetup({
             headers: {
