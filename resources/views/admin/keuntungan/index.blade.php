@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>ARDANA OnLiNe</title>
+        <title>Keuntungan | ARDANA OnLiNe</title>
         @include('general.head')
     </head>
 
     <body>
-        @include('general.navbar')
-        
+        @include('general.navbar-admin')
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

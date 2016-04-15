@@ -21,8 +21,8 @@
 				<!-- content -->
 				<div class="col-xs-12  col-sm-8 col-md-9 content">		
 					<h2></h2>
-					<p>Jika butuh bantuan, silakan hubungi mesum</p>
-					<p><a href="http://www.mesum.com">Download video bokep dangdut koplo hot oplosan</a></p>
+					<p>Jika butuh bantuan, silakan hubungi Gerry</p>
+					<p><a href="http://www.gerry.com">Gerry Kastogi</a></p>
 				</div>
 			</div>
 	  	</div>

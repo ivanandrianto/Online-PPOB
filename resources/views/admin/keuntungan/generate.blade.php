@@ -6,8 +6,7 @@
     </head>
 
     <body>
-        @include('general.navbar')
-        
+        @include('general.navbar-admin')
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
