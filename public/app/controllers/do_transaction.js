@@ -3,7 +3,6 @@
 appDoTransaction.controller('DoTransactionController', function($scope, $location, $http, API_URL) {    
     $scope.error = "";
     $scope.save = function(csrf_token) {
-        alert($scope.transaction.item_id);
         $.ajaxSetup({
             headers: {
                 'X-XSRF-Token': csrf_token

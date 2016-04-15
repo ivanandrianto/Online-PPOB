@@ -31,7 +31,6 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
 
     //save new record / update existing record
     $scope.save = function(modalstate, id, csrf_token) {
-        alert(id);
         $.ajaxSetup({
             headers: {
                 'X-XSRF-Token': csrf_token
@@ -50,7 +49,6 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
         if (modalstate === 'edit'){
             url += "edit/" + id;
         }
-        alert(url);
 
         $http({
             method: 'POST',
@@ -58,7 +56,6 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
             data: $.param($scope.merchant),
             headers: {'Content-Type': 'application/x-www-form-urlencoded',}
         }).success(function(response) {
-            alert(response);
             if(response == 1){
                 $('#myModal').modal('hide');
                 if (modalstate === 'edit'){
@@ -79,7 +76,6 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
                 $scope.error = response;
             }
         }).error(function(response) {
-            alert(response);
             console.log(response);
             alert('Error');
         });
@@ -97,7 +93,6 @@ appMerchant.controller('MerchantController', function($scope, $location, $http, 
                 method: 'DELETE',
                 url: API_URL + 'delete/' + id
             }).success(function(response) {
-                console.log(response);
                 if(response == 1){
                     location.reload();
                 } else {

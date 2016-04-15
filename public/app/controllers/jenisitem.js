@@ -83,7 +83,6 @@ appJenisItem.controller('JenisItemController', function($scope, $location, $http
                 $scope.error = response;
             }
         }).error(function(response) {
-            alert(response);
             console.log(response);
             alert('Error');
         });

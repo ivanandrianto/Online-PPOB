@@ -68,7 +68,6 @@ appMyMerchant.controller('MyMerchantController', function($scope, $location, $ht
                 $('#successModal').modal('show');
                 //location.reload();
             } else {
-                alert(response);
                 $scope.error = response;
             }
         }).error(function(response) {
