@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Merchant;
+use App\Transaksi;
+use App\Keuntungan;
 use Auth;
 
 class MerchantController extends Controller
@@ -190,15 +192,15 @@ class MerchantController extends Controller
     {
         if(!isAdmin())
             return "Not allowed";
-
-    	//$this->middleware('admin');
         $merchant = Merchant::find($id);
         if(!$merchant)
                 return "Not Found";
 
-        /* Check inTransaction dan inPermohonan */
-        /* Belum diimplementasikan */
-        
+        $transaksi_count = Transaksi::where('merchant_id','=',$id)->count();
+        $keuntungan_count = Keuntungan::where('merchant_id','=',$id)->count();
+        if(($transaksi_count>0) || ($transaksi_count>0)){
+            return "Cannot delete";
+        }
 		$merchant->delete();
 		return 1;
     }
@@ -206,9 +208,7 @@ class MerchantController extends Controller
     public function editMyMerchantView(Request $request) {
         if(!isMerchantApproved())
             return Redirect::to('/');
-
         return view('merchant.merchant.edit');
-
     }
 
 
