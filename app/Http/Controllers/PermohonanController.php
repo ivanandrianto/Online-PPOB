@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
-use App\Permohonan;
 use App\Merchant;
 
 class PermohonanController extends Controller
